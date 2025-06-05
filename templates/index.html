@@ -28,32 +28,33 @@
     </style>
 </head>
 <body>
-    <h1>Submit Your Blog</h1>
+    {% extends "base.html" %}
 
-    <form action="/submit" method="POST" enctype="multipart/form-data">
-        <label for="title">Title</label>
-        <input type="text" name="title" id="title" required>
+    {% block title %} Home {% endblock %}
 
-        <label for="body">Body</label>
-        <textarea id="body" name="body" rows="5" required></textarea>
+    {% block content %}
+        <h1>Submit Your Blog</h1>
 
-        <label for="file">Upload File</label>
-        <input type="file" name="file" id="file">
+        <form action="/submit" method="POST" enctype="multipart/form-data">
+            <label for="title">Title</label>
+            <input type="text" name="title" id="title" required>
 
-        <button type="submit">Submit</button>
-    </form>
+            <label for="body">Body</label>
+            <textarea id="body" name="body" rows="5" required></textarea>
 
-<!--    <h2>All Blog Posts</h2>-->
-<!--    {% for user in users %}-->
-<!--    <div class="post">-->
-<!--        <h3>{{ user.title }}</h3>-->
-<!--        <p>{{ user.body }}</p>-->
-<!--        {% if user.imagePath %}-->
-<!--            <img src="{{ url_for('static', filename=user.imagePath.split('static/')[-1]) }}" alt="Uploaded Image">-->
-<!--        {% endif %}-->
-<!--        <small>Posted on: {{ user.created_date.strftime('%Y-%m-%d %H:%M:%S') }}</small>-->
-<!--    </div>-->
-<!--    {% endfor %}-->
+            <label for="file">Upload File</label>
+            <input type="file" name="file" id="file">
 
+            <button type="submit">Submit</button>
+        </form>
+
+        <h2> All Blogs</h2>
+        {% for blog in blogs %}
+            <div class="blog">
+                <h3><a href="{{ url_for('detail', id=blog.id) }}">{{ blog.title }}</a></h3>
+            <!-- <p>{{ blog.body[:100] }}{% if blog.body|length > 100 %}...{% endif %}</p>-->
+            </div>
+        {% endfor %}
+    {% endblock %}
 </body>
 </html>

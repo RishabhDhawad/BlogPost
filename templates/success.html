@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog Saved</title>
+</head>
+<body>
+    {% extends "base.html "%}
+
+    {% block title %} Success {% endblock %}
+
+    {% block content %}
+        <h1> Your Blog has been saved</h1>
+        <p>Click the link below to view your Blog:</p>
+        <a href="{{ url_for('detail', id=blog_id) }}"> View Blog Post</a>
+    {% endblock %}
+</body>
+</html>
