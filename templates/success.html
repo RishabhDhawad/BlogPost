@@ -1,18 +1,95 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Blog Saved</title>
-</head>
-<body>
-    {% extends "base.html "%}
+{% extends "base.html" %}
 
-    {% block title %} Success {% endblock %}
+{% block title %}Success - Flask Blog{% endblock %}
 
-    {% block content %}
-        <h1> Your Blog has been saved</h1>
-        <p>Click the link below to view your Blog:</p>
-        <a href="{{ url_for('detail', id=blog_id) }}"> View Blog Post</a>
-    {% endblock %}
-</body>
-</html>
+{% block content %}
+<style>
+    .success-container {
+        text-align: center;
+        padding: 40px 20px;
+    }
+    
+    .success-icon {
+        font-size: 60px;
+        color: #28a745;
+        margin-bottom: 20px;
+    }
+    
+    .success-title {
+        color: #28a745;
+        margin-bottom: 20px;
+    }
+    
+    .success-message {
+        font-size: 18px;
+        color: #666;
+        margin-bottom: 30px;
+    }
+    
+    .action-buttons {
+        margin-top: 30px;
+    }
+    
+    .btn {
+        display: inline-block;
+        padding: 12px 25px;
+        margin: 10px;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: bold;
+        transition: background-color 0.3s;
+    }
+    
+    .btn-primary {
+        background-color: #007bff;
+        color: white;
+    }
+    
+    .btn-primary:hover {
+        background-color: #0056b3;
+        color: white;
+    }
+    
+    .btn-secondary {
+        background-color: #6c757d;
+        color: white;
+    }
+    
+    .btn-secondary:hover {
+        background-color: #545b62;
+        color: white;
+    }
+    
+    .blog-preview {
+        background-color: #f8f9fa;
+        padding: 20px;
+        border-radius: 8px;
+        margin: 20px 0;
+        text-align: left;
+    }
+    
+    .blog-preview h3 {
+        color: #333;
+        margin-bottom: 10px;
+    }
+</style>
+
+<div class="success-container">
+    <div class="success-icon">✅</div>
+    <h1 class="success-title">Blog Post Published Successfully!</h1>
+    <p class="success-message">Your blog post has been saved and is now live.</p>
+    
+    <div class="blog-preview">
+        <h3>{{ blog.title }}</h3>
+        <p><strong>Published:</strong> {{ blog.created_date.strftime('%B %d, %Y at %I:%M %p') }}</p>
+        {% if blog.image_filename %}
+            <p><strong>Image:</strong> Uploaded successfully</p>
+        {% endif %}
+    </div>
+    
+    <div class="action-buttons">
+        <a href="{{ url_for('detail', id=blog.id) }}" class="btn btn-primary">View Your Blog Post</a>
+        <a href="{{ url_for('index') }}" class="btn btn-secondary">Back to Home</a>
+    </div>
+</div>
+{% endblock %}

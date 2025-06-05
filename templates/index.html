@@ -1,60 +1,129 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flask BLog</title>
-    <style>
-        body{
-            font-family: Arial, Helvetica, sans-serif;
-            margin: 20px;
-        }
-        form {
-            max-width: 500px;
-        }
-        label {
-            display: block;
-            margin-top: 10px;
-        }
-        input , textarea {
-            width: 100%;
-            padding: 5px;
-            margin-top: 5px;
-        }
-        button {
-            margin-top: 15px;
-            padding: 10px 20px;
-        }
-    </style>
-</head>
-<body>
-    {% extends "base.html" %}
+{% extends "base.html" %}
 
-    {% block title %} Home {% endblock %}
+{% block title %}Home - Flask Blog{% endblock %}
 
-    {% block content %}
-        <h1>Submit Your Blog</h1>
+{% block content %}
+<style>
+    .form-section {
+        background-color: #f8f9fa;
+        padding: 25px;
+        border-radius: 8px;
+        margin-bottom: 40px;
+    }
+    
+    .form-group {
+        margin-bottom: 20px;
+    }
+    
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: #333;
+    }
+    
+    input[type="text"],
+    textarea,
+    input[type="file"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 14px;
+        box-sizing: border-box;
+    }
+    
+    textarea {
+        resize: vertical;
+        min-height: 120px;
+    }
+    
+    .submit-btn {
+        background-color: #007bff;
+        color: white;
+        padding: 12px 30px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+    }
+    
+    .submit-btn:hover {
+        background-color: #0056b3;
+    }
+    
+    .blog-list {
+        margin-top: 40px;
+    }
+    
+    .blog-item {
+        background: white;
+        border: 1px solid #eee;
+        padding: 20px;
+        margin-bottom: 15px;
+        border-radius: 8px;
+        border-left: 4px solid #007bff;
+    }
+    
+    .blog-item h3 {
+        margin: 0 0 10px 0;
+    }
+    
+    .blog-item a {
+        color: #007bff;
+        text-decoration: none;
+        font-size: 18px;
+    }
+    
+    .blog-item a:hover {
+        text-decoration: underline;
+    }
+    
+    .blog-date {
+        color: #666;
+        font-size: 12px;
+        margin-top: 10px;
+    }
+</style>
 
-        <form action="/submit" method="POST" enctype="multipart/form-data">
-            <label for="title">Title</label>
-            <input type="text" name="title" id="title" required>
+<div class="form-section">
+    <h1>Create New Blog Post</h1>
+    
+    <form action="{{ url_for('submit') }}" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="title">Blog Title</label>
+            <input type="text" name="title" id="title" required placeholder="Enter your blog title">
+        </div>
 
-            <label for="body">Body</label>
-            <textarea id="body" name="body" rows="5" required></textarea>
+        <div class="form-group">
+            <label for="body">Blog Content</label>
+            <textarea name="body" id="body" required placeholder="Write your blog content here..."></textarea>
+        </div>
 
-            <label for="file">Upload File</label>
-            <input type="file" name="file" id="file">
+        <div class="form-group">
+            <label for="file">Upload Image (Optional)</label>
+            <input type="file" name="file" id="file" accept="image/*">
+        </div>
 
-            <button type="submit">Submit</button>
-        </form>
+        <button type="submit" class="submit-btn">Publish Blog</button>
+    </form>
+</div>
 
-        <h2> All Blogs</h2>
+<div class="blog-list">
+    <h2>All Blog Posts</h2>
+    
+    {% if blogs %}
         {% for blog in blogs %}
-            <div class="blog">
+            <div class="blog-item">
                 <h3><a href="{{ url_for('detail', id=blog.id) }}">{{ blog.title }}</a></h3>
-            <!-- <p>{{ blog.body[:100] }}{% if blog.body|length > 100 %}...{% endif %}</p>-->
+                <div class="blog-date">
+                    Published on {{ blog.created_date.strftime('%B %d, %Y at %I:%M %p') }}
+                </div>
             </div>
         {% endfor %}
-    {% endblock %}
-</body>
-</html>
+    {% else %}
+        <p>No blog posts yet. Create your first blog post above!</p>
+    {% endif %}
+</div>
+{% endblock %}
