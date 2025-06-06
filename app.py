@@ -1,4 +1,5 @@
 import os
+import pytz
 from datetime import datetime, timezone
 from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
@@ -26,6 +27,10 @@ db = SQLAlchemy(app)
 with app.app_context():
     db.create_all()
 
+UTC = pytz.utc
+IST = pytz.timezone('Asia/Kolkata')
+datetime_ist = datetime.now(IST)
+
 # def allowed_file(filename):
 #     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
@@ -36,8 +41,8 @@ class Blog(db.Model):
     title = db.Column(db.String(255), nullable=False)
     body = db.Column(db.Text, nullable=False)
     image_filename = db.Column(db.String(255))
-    created_date = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc))
-    update_date = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc), onupdate=lambda: datetime.now(timezone.utc))
+    created_date = db.Column(db.DateTime, default=datetime_ist)
+    update_date = db.Column(db.DateTime, default=datetime_ist, onupdate=datetime_ist)
 
     def __repr__(self):
         return f'<User {self.title}>'
@@ -56,19 +61,21 @@ def detail(id):
 
 @app.route('/create')
 def create():
-    blogs = Blog.query.order_by(Blog.created_date.desc()).all()
-    return render_template('createblog.html', blog=blogs)
+    # blogs = Blog.query.order_by(Blog.created_date.desc()).all()
+    return render_template('createblog.html')
 
 @app.route('/listblogs')
 def listblogs():
-    # blogs = Blog.query.all()
-    return render_template('listblogs.html')
+    blogs = Blog.query.order_by(Blog.created_date.desc()).all()
+    return render_template('listblogs.html', blogs=blogs)
 
 # Handle form submission
 @app.route('/submit', methods=['POST'])
 def submit():
     title = request.form.get('title', '').strip()
     body = request.form.get('body', '').strip()
+
+    print(f"title: '{title}', body: '{body}'")
 
     if not title or not body:
         flash('Title and body are required')
