@@ -4,12 +4,6 @@
 
 {% block content %}
 <style>
-    .form-section {
-        background-color: #f8f9fa;
-        padding: 25px;
-        border-radius: 8px;
-        margin-bottom: 40px;
-    }
     
     .form-group {
         margin-bottom: 20px;
@@ -28,14 +22,12 @@
         width: 100%;
         padding: 10px;
         border: 1px solid #ddd;
-        border-radius: 5px;
-        font-size: 14px;
         box-sizing: border-box;
     }
     
     textarea {
         resize: vertical;
-        min-height: 120px;
+        min-height: 100px;
     }
     
     .submit-btn {
@@ -43,14 +35,7 @@
         color: white;
         padding: 12px 30px;
         border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 16px;
         font-weight: bold;
-    }
-    
-    .submit-btn:hover {
-        background-color: #0056b3;
     }
     
     .blog-list {
@@ -60,24 +45,7 @@
     .blog-item {
         background: white;
         border: 1px solid #eee;
-        padding: 20px;
-        margin-bottom: 15px;
-        border-radius: 8px;
-        border-left: 4px solid #007bff;
-    }
-    
-    .blog-item h3 {
-        margin: 0 0 10px 0;
-    }
-    
-    .blog-item a {
-        color: #007bff;
-        text-decoration: none;
-        font-size: 18px;
-    }
-    
-    .blog-item a:hover {
-        text-decoration: underline;
+        padding: 10px;
     }
     
     .blog-date {
@@ -93,12 +61,12 @@
     <form action="{{ url_for('submit') }}" method="POST" enctype="multipart/form-data">
         <div class="form-group">
             <label for="title">Blog Title</label>
-            <input type="text" name="title" id="title" required placeholder="Enter your blog title">
+            <input type="text" name="title" id="title" >
         </div>
 
         <div class="form-group">
             <label for="body">Blog Content</label>
-            <textarea name="body" id="body" required placeholder="Write your blog content here..."></textarea>
+            <textarea name="body" id="body" ></textarea>
         </div>
 
         <div class="form-group">
@@ -110,20 +78,20 @@
     </form>
 </div>
 
-<div class="blog-list">
-    <h2>All Blog Posts</h2>
-    
-    {% if blogs %}
-        {% for blog in blogs %}
-            <div class="blog-item">
-                <h3><a href="{{ url_for('detail', id=blog.id) }}">{{ blog.title }}</a></h3>
-                <div class="blog-date">
-                    Published on {{ blog.created_date.strftime('%B %d, %Y at %I:%M %p') }}
-                </div>
-            </div>
-        {% endfor %}
-    {% else %}
-        <p>No blog posts yet. Create your first blog post above!</p>
-    {% endif %}
-</div>
+<!--<div class="blog-list">-->
+<!--    <h2>All Blog Posts</h2>-->
+<!--    -->
+<!--    {% if blogs %}-->
+<!--        {% for blog in blogs %}-->
+<!--            <div class="blog-item">-->
+<!--                <h3><a href="{{ url_for('detail', id=blog.id) }}">{{ blog.title }}</a></h3>-->
+<!--                <div class="blog-date">-->
+<!--                    Published on {{ blog.created_date.strftime('%B %d, %Y at %I:%M %p') }}-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        {% endfor %}-->
+<!--    {% else %}-->
+<!--        <p>No blog posts yet. Create your first blog post above!</p>-->
+<!--    {% endif %}-->
+<!--</div>-->
 {% endblock %}

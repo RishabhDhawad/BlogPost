@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Flask Blog{% endblock %}
+
+{% block content %}
+<style>
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: #333;
+    }
+
+    input[type="text"],
+    textarea,
+    input[type="file"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        box-sizing: border-box;
+    }
+
+    textarea {
+        resize: vertical;
+        min-height: 100px;
+    }
+
+    .submit-btn {
+        background-color: #007bff;
+        color: white;
+        padding: 12px 30px;
+        border: none;
+        font-weight: bold;
+    }
+
+    .blog-list {
+        margin-top: 40px;
+    }
+
+    .blog-item {
+        background: white;
+        border: 1px solid #eee;
+        padding: 10px;
+    }
+
+    .blog-date {
+        color: #666;
+        font-size: 12px;
+        margin-top: 10px;
+    }
+</style>
+
+<!--<div class="form-section">-->
+<!--    <h1>Create New Blog Post</h1>-->
+<!--    -->
+<!--    <form action="{{ url_for('submit') }}" method="POST" enctype="multipart/form-data">-->
+<!--        <div class="form-group">-->
+<!--            <label for="title">Blog Title</label>-->
+<!--            <input type="text" name="title" id="title" >-->
+<!--        </div>-->
+
+<!--        <div class="form-group">-->
+<!--            <label for="body">Blog Content</label>-->
+<!--            <textarea name="body" id="body" ></textarea>-->
+<!--        </div>-->
+
+<!--        <div class="form-group">-->
+<!--            <label for="file">Upload Image (Optional)</label>-->
+<!--            <input type="file" name="file" id="file" accept="image/*">-->
+<!--        </div>-->
+
+<!--        <button type="submit" class="submit-btn">Publish Blog</button>-->
+<!--    </form>-->
+<!--</div>-->
+
+<div class="blog-list">
+    <h2>All Blog Posts</h2>
+
+    {% if blogs %}
+        {% for blog in blogs %}
+            <div class="blog-item">
+                <h3><a href="{{ url_for('detail', id=blog.id) }}">{{ blog.title }}</a></h3>
+                <div class="blog-date">
+                    Published on {{ blog.created_date.strftime('%B %d, %Y at %I:%M %p') }}
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No blog posts yet. Create your first blog post above!</p>
+    {% endif %}
+</div>
+{% endblock %}

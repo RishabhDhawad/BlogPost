@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Flask Blog{% endblock %}
+
+{% block content %}
+<style>
+    
+    .form-group {
+        margin-bottom: 20px;
+    }
+    
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: #333;
+    }
+    
+    input[type="text"],
+    textarea,
+    input[type="file"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        box-sizing: border-box;
+    }
+    
+    textarea {
+        resize: vertical;
+        min-height: 100px;
+    }
+    
+    .submit-btn {
+        background-color: #007bff;
+        color: white;
+        padding: 12px 30px;
+        border: none;
+        font-weight: bold;
+    }
+
+    .blog-list {
+        margin-top: 40px;
+    }
+    
+    .blog-item {
+        background: white;
+        border: 1px solid #eee;
+        padding: 10px;
+    }
+    
+    .blog-date {
+        color: #666;
+        font-size: 12px;
+        margin-top: 10px;
+    }
+
+    .welcome-message {
+        margin: 10px;
+        padding: 15px;
+        /* background-color: #e9f5ff; */
+        color: #0077b6;
+        text-align: center;
+        border-radius: 8px;
+    }
+</style>
+
+<div class="welcome-message">
+      Welcome to My Blog Page  
+</div>
+{% endblock %}

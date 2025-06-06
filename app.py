@@ -22,8 +22,12 @@ os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 # Initialize DB
 db = SQLAlchemy(app)
 
-def allowed_file(filename):
-    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+# Create tables in the database
+with app.app_context():
+    db.create_all()
+
+# def allowed_file(filename):
+#     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 # Model
 class Blog(db.Model):
@@ -40,15 +44,25 @@ class Blog(db.Model):
 
 # Homepage - list of blogs and create form
 @app.route('/')
-def index():
+def home():
     blogs = Blog.query.order_by(Blog.created_date.desc()).all()
-    return render_template('index.html', blogs=blogs)
+    return render_template('home.html', blogs=blogs)
 
 # Detail page - shows a specific blog post
 @app.route('/blog/<int:id>')
 def detail(id):
     blog = Blog.query.get_or_404(id)
     return render_template('detail.html', blog=blog)
+
+@app.route('/create')
+def create():
+    blogs = Blog.query.order_by(Blog.created_date.desc()).all()
+    return render_template('createblog.html', blog=blogs)
+
+@app.route('/listblogs')
+def listblogs():
+    # blogs = Blog.query.all()
+    return render_template('listblogs.html')
 
 # Handle form submission
 @app.route('/submit', methods=['POST'])
@@ -58,7 +72,7 @@ def submit():
 
     if not title or not body:
         flash('Title and body are required')
-        return redirect(url_for('index'))
+        return redirect(url_for('home'))
 
     file = request.files.get('file')
     image_filename = None
@@ -66,13 +80,14 @@ def submit():
     # Handle file upload
     if file and file.filename:
         filename = secure_filename(file.filename)
-        if filename and allowed_file(filename):
+        # if filename and allowed_file(filename):
+        if filename:
             file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             file.save(file_path)
             image_filename = filename
         elif filename:
             flash('File type not allowed')
-            return redirect(url_for('index'))
+            return redirect(url_for('home'))
 
     # Save blog to database
     new_blog = Blog(

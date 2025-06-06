@@ -16,7 +16,6 @@
             background-color: #333;
             padding: 15px;
             margin-bottom: 30px;
-            border-radius: 5px;
         }
 
         nav a {
@@ -31,42 +30,29 @@
         }
 
         .container {
-            max-width: 800px;
             margin: 0 auto;
             background: white;
             padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
 
-        .flash-messages {
-            margin-bottom: 20px;
-        }
-
-        .flash-message {
-            padding: 10px;
-            margin-bottom: 10px;
-            border-radius: 5px;
-            background-color: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
     </style>
 </head>
 <body>
     <nav>
-        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('home') }}">Home</a>
+        <a href="{{ url_for('create') }}">Create Blog</a>
+        <a href="{{ url_for('listblogs') }}">List Blogs</a>
     </nav>
 
     <div class="container">
         <!-- Flash messages -->
         {% with messages = get_flashed_messages() %}
             {% if messages %}
-                <div class="flash-messages">
-                    {% for message in messages %}
-                        <div class="flash-message">{{ message }}</div>
-                    {% endfor %}
-                </div>
+<!--                <div class="flash-messages">-->
+<!--                    {% for message in messages %}-->
+<!--                        <div class="flash-message">{{ message }}</div>-->
+<!--                    {% endfor %}-->
+<!--                </div>-->
             {% endif %}
         {% endwith %}
 
