@@ -69,6 +69,22 @@ def listblogs():
     blogs = Blog.query.order_by(Blog.created_date.desc()).all()
     return render_template('listblogs.html', blogs=blogs)
 
+@app.route('/delete/<int:id>')
+def delete_post(id):
+    post_to_delete = Blog.query.get_or_404(id)
+
+    try:
+        db.session.delete(post_to_delete)
+        db.session.commit()
+
+        #Return a message
+        flash('Blog Post Was Deleted!')
+        return redirect(url_for('listblogs'))
+
+    except:
+        flash("Oops there is some probleem deleting posts")
+        return redirect(url_for('listblogs'))
+
 # Handle form submission
 @app.route('/submit', methods=['POST'])
 def submit():
