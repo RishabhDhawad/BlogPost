@@ -85,6 +85,21 @@ def delete_post(id):
         flash("Oops there is some probleem deleting posts")
         return redirect(url_for('listblogs'))
 
+@app.route('/posts/edits/<int:id>', methods=['GET','POST'])
+def edit_blog(id):
+    blog = Blog.query.get_or_404(id)
+
+    if request.method == 'POST':
+        print("POST recieved", request.form)
+        blog.title = request.form['title']
+        blog.body = request.form['body']
+        # blog.image_filename = request.files['image_filename']
+        db.session.commit()
+        flash('blog post updated successfully')
+        return redirect(url_for('listblogs'))
+    else:
+        return render_template('edit.html', blog=blog)
+
 # Handle form submission
 @app.route('/submit', methods=['POST'])
 def submit():

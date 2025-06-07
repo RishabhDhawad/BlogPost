@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {{ blog.title }} - Flask Blog
+{% endblock %}
+
+{% block head %}
+    <title>Edit Post</title>
+{% endblock %}
+
+{% block content %}
+
+<style>
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+
+    input[type="text"],
+    textarea,
+    input[type="file"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        box-sizing: border-box;
+    }
+
+    textarea {
+        resize: vertical;
+        min-height: 100px;
+    }
+
+    .submit-btn {
+        background-color: #007bff;
+        color: white;
+        padding: 12px 30px;
+        border: none;
+        font-weight: bold;
+    }
+    .cancel-btn {
+        background-color: #007bff;
+        color: white;
+        padding: 12px 30px;
+        border: none;
+        font-weight: bold;
+    }
+</style>
+
+<h2>Edit BlogPost: </h2>
+
+<form method="POST">
+    <div class="form-group">
+        <label for="title">Blog Title</label>
+        <input type="text" name="title" id="title" value="{{ blog.title }}" required>
+    </div>
+
+    <div class="form-group">
+        <label for="body">Blog Content</label>
+        <textarea name="body" id="body" required>{{ blog.body }}</textarea>
+    </div>
+
+    <button type="submit" class="submit-btn">Update</button>
+    <button type="submit" class="cancel-btn">
+        <a href="{{ url_for('listblogs') }}">Cancel</a>
+    </button>
+</form>
+{% endblock %}

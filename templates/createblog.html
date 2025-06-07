@@ -1,8 +1,7 @@
 {% extends "base.html" %}
-
 {% block title %}Home - Flask Blog{% endblock %}
-
 {% block content %}
+
 <style>
     
     .form-group {
@@ -39,7 +38,7 @@
 </style>
 
 <div class="form-section">
-    <h1>Create New Blog Post</h1>
+    <h1>Create New Blog</h1>
     
     <form action="{{ url_for('submit') }}" method="POST" enctype="multipart/form-data">
         <div class="form-group">
