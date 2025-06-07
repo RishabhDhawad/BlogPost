@@ -31,6 +31,7 @@ UTC = pytz.utc
 IST = pytz.timezone('Asia/Kolkata')
 datetime_ist = datetime.now(IST)
 
+
 # def allowed_file(filename):
 #     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
@@ -47,11 +48,13 @@ class Blog(db.Model):
     def __repr__(self):
         return f'<User {self.title}>'
 
+
 # Homepage - list of blogs and create form
 @app.route('/')
 def home():
     blogs = Blog.query.order_by(Blog.created_date.desc()).all()
     return render_template('home.html', blogs=blogs)
+
 
 # Detail page - shows a specific blog post
 @app.route('/blog/<int:id>')
@@ -59,15 +62,18 @@ def detail(id):
     blog = Blog.query.get_or_404(id)
     return render_template('detail.html', blog=blog)
 
+
 @app.route('/create')
 def create():
     # blogs = Blog.query.order_by(Blog.created_date.desc()).all()
     return render_template('createblog.html')
 
+
 @app.route('/listblogs')
 def listblogs():
     blogs = Blog.query.order_by(Blog.created_date.desc()).all()
     return render_template('listblogs.html', blogs=blogs)
+
 
 @app.route('/delete/<int:id>')
 def delete_post(id):
@@ -77,7 +83,7 @@ def delete_post(id):
         db.session.delete(post_to_delete)
         db.session.commit()
 
-        #Return a message
+        # Return a message
         flash('Blog Post Was Deleted!')
         return redirect(url_for('listblogs'))
 
@@ -85,7 +91,8 @@ def delete_post(id):
         flash("Oops there is some probleem deleting posts")
         return redirect(url_for('listblogs'))
 
-@app.route('/posts/edits/<int:id>', methods=['GET','POST'])
+
+@app.route('/posts/edits/<int:id>', methods=['GET', 'POST'])
 def edit_blog(id):
     blog = Blog.query.get_or_404(id)
 
@@ -99,6 +106,7 @@ def edit_blog(id):
         return redirect(url_for('listblogs'))
     else:
         return render_template('edit.html', blog=blog)
+
 
 # Handle form submission
 @app.route('/submit', methods=['POST'])
@@ -139,6 +147,7 @@ def submit():
     # Redirect to success page with the new user's ID
     flash('Blog post created successfully')
     return redirect(url_for('success', blog_id=new_blog.id))
+
 
 # Success page - shows confirmation and link to detail
 @app.route('/success/<int:blog_id>')

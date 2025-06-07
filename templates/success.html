@@ -52,18 +52,18 @@
 <div class="success-container">
     <h1 class="success-title">Blog Post Published Successfully!</h1>
     <p class="success-message">Your blog post has been saved and is now live.</p>
-    
+
     <div class="blog-preview">
         <h3>{{ blog.title }}</h3>
         <p><strong>Published:</strong> {{ blog.created_date.strftime('%B %d, %Y at %I:%M %p') }}</p>
         {% if blog.image_filename %}
-            <p><strong>Image:</strong> Uploaded successfully</p>
+        <p><strong>Image:</strong> Uploaded successfully</p>
         {% endif %}
     </div>
-    
+
     <div class="action-buttons">
-        <a href="{{ url_for('detail', id=blog.id) }}" class="btn btn-primary">View Your Blog Post</a>
-        <a href="{{ url_for('home') }}" class="btn btn-secondary">Back to Home</a>
+        <a class="btn btn-primary" href="{{ url_for('detail', id=blog.id) }}">View Your Blog Post</a>
+        <a class="btn btn-secondary" href="{{ url_for('home') }}">Back to Home</a>
     </div>
 </div>
 {% endblock %}

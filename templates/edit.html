@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 
 {% block title %}
-    {{ blog.title }} - Flask Blog
+{{ blog.title }} - Flask Blog
 {% endblock %}
 
 {% block head %}
-    <title>Edit Post</title>
+<title>Edit Post</title>
 {% endblock %}
 
 {% block content %}
@@ -56,16 +56,16 @@
 <form method="POST">
     <div class="form-group">
         <label for="title">Blog Title</label>
-        <input type="text" name="title" id="title" value="{{ blog.title }}" required>
+        <input id="title" name="title" required type="text" value="{{ blog.title }}">
     </div>
 
     <div class="form-group">
         <label for="body">Blog Content</label>
-        <textarea name="body" id="body" required>{{ blog.body }}</textarea>
+        <textarea id="body" name="body" required>{{ blog.body }}</textarea>
     </div>
 
-    <button type="submit" class="submit-btn">Update</button>
-    <button type="submit" class="cancel-btn">
+    <button class="submit-btn" type="submit">Update</button>
+    <button class="cancel-btn" type="submit">
         <a href="{{ url_for('listblogs') }}">Cancel</a>
     </button>
 </form>
