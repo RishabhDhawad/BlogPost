@@ -20,3 +20,6 @@ static/uploads/
 # OS files
 .DS_Store
 Thumbs.db
+
+.env
+

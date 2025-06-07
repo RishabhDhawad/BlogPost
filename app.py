@@ -4,10 +4,13 @@ from datetime import datetime, timezone
 from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.utils import secure_filename
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Set up Flask app
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'dev-secret-key-12345'  # For development only
+app.config['SECRET_KEY'] = os.environ.get('FLASK_SECRET_KEY')
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 # Configurations
@@ -27,7 +30,7 @@ db = SQLAlchemy(app)
 with app.app_context():
     db.create_all()
 
-UTC = pytz.utc
+# UTC = pytz.utc
 IST = pytz.timezone('Asia/Kolkata')
 datetime_ist = datetime.now(IST)
 
@@ -97,7 +100,6 @@ def edit_blog(id):
     blog = Blog.query.get_or_404(id)
 
     if request.method == 'POST':
-        print("POST recieved", request.form)
         blog.title = request.form['title']
         blog.body = request.form['body']
         # blog.image_filename = request.files['image_filename']
@@ -113,8 +115,6 @@ def edit_blog(id):
 def submit():
     title = request.form.get('title', '').strip()
     body = request.form.get('body', '').strip()
-
-    print(f"title: '{title}', body: '{body}'")
 
     if not title or not body:
         flash('Title and body are required')
