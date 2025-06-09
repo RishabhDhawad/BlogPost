@@ -1,7 +1,9 @@
 import os
+from multiprocessing.spawn import old_main_modules
+
 import pytz
 from datetime import datetime, timezone
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash, current_app
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.utils import secure_filename
 from dotenv import load_dotenv
@@ -83,6 +85,14 @@ def delete_post(id):
     post_to_delete = Blog.query.get_or_404(id)
 
     try:
+        # Delete photo from the static folder
+        if post_to_delete.image_filename:
+            # join (static folder path, the uploads directory, and the image filename).
+            photo_path = os.path.join(current_app.static_folder, 'uploads', post_to_delete.image_filename)
+            if os.path.exists(photo_path):
+                os.remove(photo_path)
+
+        # Delete the blog post from the database
         db.session.delete(post_to_delete)
         db.session.commit()
 
@@ -90,8 +100,9 @@ def delete_post(id):
         flash('Blog Post Was Deleted!')
         return redirect(url_for('listblogs'))
 
-    except:
-        flash("Oops there is some probleem deleting posts")
+    except Exception as e:
+        print(f"Error deleting post: {e}")
+        flash("Oops there is some problem deleting posts")
         return redirect(url_for('listblogs'))
 
 
@@ -102,7 +113,32 @@ def edit_blog(id):
     if request.method == 'POST':
         blog.title = request.form['title']
         blog.body = request.form['body']
-        # blog.image_filename = request.files['image_filename']
+
+        # Edit Image
+        file = request.files.get('file') # Getting the uploaded file
+        if file and file.filename:  # Checking if a new file is uploaded
+            # Delete the old image if exists
+            if blog.image_filename:
+                old_photo_path = os.path.join(current_app.static_folder, 'uploads', blog.image_filename)
+                if os.path.exists(old_photo_path):
+                    os.remove(old_photo_path)
+
+            # Save the new image
+            new_filename = secure_filename(file.filename)
+            file_path = os.path.join(app.config['UPLOAD_FOLDER'], new_filename)
+            file.save(file_path)
+            blog.image_filename = new_filename # Update the blog's image filename
+
+        # Remove existing Image (Optional)
+        elif 'remove_image' in request.form:
+            if blog.image_filename:
+                old_photo_path = os.path.join(current_app.static_folder, 'uploads', blog.image_filename)
+                if os.path.exists(old_photo_path):
+                    os.remove(old_photo_path)
+                blog.image_filename = None
+
+
+        # Commit the changes to the database
         db.session.commit()
         flash('blog post updated successfully')
         return redirect(url_for('listblogs'))
