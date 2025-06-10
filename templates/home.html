@@ -6,14 +6,18 @@
     .welcome-message {
         margin: 10px;
         padding: 15px;
-        /* background-color: #e9f5ff; */
         color: #0077b6;
         text-align: center;
         border-radius: 8px;
     }
+    .welcome-image {
+        display: block;
+        margin: 0 auto; 
+        max-width: 80%; 
+        height: auto; 
+    }
 </style>
 
-<div class="welcome-message">
-    Welcome to My Blog Page
-</div>
+<!-- Welcome message -->
+<img src="{{ url_for('static', filename='screenshots/welcome.png') }}" class="welcome-image" alt="Welcome Image">
 {% endblock %}

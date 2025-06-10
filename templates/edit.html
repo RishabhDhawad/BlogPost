@@ -63,6 +63,13 @@
         <textarea id="body" name="body" required>{{ blog.body }}</textarea>
     </div>
 
+    {% if current_image %}
+        <div>
+            <img src="{{ url_for('static', filename='uploads/' + current_image) }}" alt="Current Image" style="max-width: 200px;">
+            <br>
+        </div>
+    {% endif %}
+
     <div class="form-group">
         <label for="image">Upload Image</label>
         <input type="file" id="image" name="file" accept="image/*">

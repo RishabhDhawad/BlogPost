@@ -18,6 +18,7 @@ Welcome to the **Flask Blog Application**! This is a simple, clean, and function
 
 - 🖋️ **Create, Edit, and Delete Blog Posts**
 - 🖼️ **Upload and Display Images** (JPG, PNG, GIF, etc.)
+- 🔄 **Edit Blog Posts with Current Image Display**: Users can see the current image when editing and choose to remove it.
 - 🕒 **Auto-generated Timestamps** (Created & Updated)
 - 💾 **SQLite Database** with SQLAlchemy ORM
 - ⚡ **Flash Messages** for User Feedback
