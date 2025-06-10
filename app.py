@@ -5,7 +5,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash, cur
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.utils import secure_filename
 from dotenv import load_dotenv
-from flask_login import UserMixin, LoginManager, login_user, login_required, logout_user, current_user
+from flask_login import UserMixin, LoginManager, login_user, login_required, logout_user
 from flask_bcrypt import Bcrypt
 
 load_dotenv()
@@ -120,12 +120,6 @@ def login():
         password = request.form['password']
         # Retrieves the user from the database.
         user = User.query.filter_by(username=username).first()
-
-        # Debugging: Check if user is found
-        if user:
-            print(f"User found: {user.username}")
-        else:
-            print("User not found")
 
         # Verifies the password with Bcrypt.
         if user and bcrypt.check_password_hash(user.password, password):
