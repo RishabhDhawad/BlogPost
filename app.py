@@ -40,8 +40,8 @@ os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 # UTC = pytz.utc
 IST = pytz.timezone('Asia/Kolkata')
 
+# Function to get current IST time
 def get_ist_time():
-    """Function to gey current IST time"""
     return datetime.now(IST)
 
 # User Model Class
