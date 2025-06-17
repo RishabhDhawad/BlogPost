@@ -4,20 +4,27 @@
 
 <style>
     .welcome-message {
-        margin: 10px;
-        padding: 15px;
-        color: #0077b6;
+        margin: 20px auto;
+        padding: 20px;
+        color: #333;
         text-align: center;
-        border-radius: 8px;
+        max-width: 800px;
     }
+
     .welcome-image {
         display: block;
-        margin: 0 auto; 
-        max-width: 80%; 
-        height: auto; 
+        margin: 20px auto;
+        max-width: 85%;
+        height: auto;
+        border-radius: 8px;
     }
 </style>
 
-<!-- Welcome message -->
-<img src="{{ url_for('static', filename='screenshots/welcome.png') }}" class="welcome-image" alt="Welcome Image">
+<div class="welcome-message">
+    <!-- <h1>Welcome to Flask Blog</h1> -->
+    <!-- <p>Share your thoughts and ideas with the world</p> -->
+</div>
+<img src="{{ url_for('static', filename='screenshots/welcome.png') }}" 
+     class="welcome-image" 
+     alt="Welcome to Flask Blog">
 {% endblock %}

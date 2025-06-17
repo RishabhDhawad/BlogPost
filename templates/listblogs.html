@@ -2,39 +2,61 @@
 block content %}
 
 <style>
-      .blog-list {
-          margin-top: 20px;
-      }
+    .blog-list {
+        max-width: 800px;
+        margin: 30px auto;
+        padding: 0 20px;
+    }
 
-      .blog-item {
-          background: white;
-          border: 1px solid #eee;
-          padding: 5px;
-      }
+    .blog-list h2 {
+        color: #333;
+        margin-bottom: 25px;
+        text-align: center;
+    }
 
-      .blog-date {
-          color: #666;
-          font-size: 12px;
-          margin-top: 8px;
-      }
+    .blog-item {
+        background: white;
+        border: 1px solid #e0e0e0;
+        border-radius: 6px;
+        padding: 15px;
+        margin-bottom: 15px;
+    }
 
-      .delete-btn {
-          margin-top: 10px;
-      }
+    .blog-item h3 {
+        margin: 0;
+        font-size: 1.2rem;
+    }
+
+    .blog-item h3 a {
+        color: #333;
+        text-decoration: none;
+    }
+
+    .blog-item h3 a:hover {
+        color: #666;
+    }
+
+    .blog-date {
+        color: #666;
+        font-size: 0.9rem;
+        margin-top: 8px;
+    }
 </style>
 
 <div class="blog-list">
-  <h2>All Blog Posts</h2>
+    <h2>All Blog Posts</h2>
 
-  {% if blogs %} {% for blog in blogs %}
-  <div class="blog-item">
-    <h3><a href="{{ url_for('detail', id=blog.id) }}">{{ blog.title }}</a></h3>
-    <div class="blog-date">
-      Published on {{ blog.created_date.strftime('%B %d, %Y at %I:%M %p') }}
-    </div>
-  </div>
-  {% endfor %} {% else %}
-  <p>No blog posts yet. Create your first blog post above!</p>
-  {% endif %}
+    {% if blogs %} 
+        {% for blog in blogs %}
+        <div class="blog-item">
+            <h3><a href="{{ url_for('detail', id=blog.id) }}">{{ blog.title }}</a></h3>
+            <div class="blog-date">
+                Published on {{ blog.created_date.strftime('%B %d, %Y at %I:%M %p') }}
+            </div>
+        </div>
+        {% endfor %} 
+    {% else %}
+        <p>No blog posts yet. Create your first blog post above!</p>
+    {% endif %}
 </div>
 {% endblock %}
