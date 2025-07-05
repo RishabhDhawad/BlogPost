@@ -12,12 +12,13 @@
             background-color: #f5f5f5;
         }
         nav {
-            background-color: #333;
-            padding: 15px;
+            background: linear-gradient(135deg, #333 0%, #444 100%);
+            padding: 18px 25px;
             margin-bottom: 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
         .nav-left, .nav-right {
             display: flex;
@@ -25,16 +26,19 @@
         }
         nav a {
             color: white;
-            margin-right: 20px;
+            margin-right: 25px;
             text-decoration: none;
-            font-weight: bold;
+            font-weight: 600;
+            padding: 8px 12px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
         }
-        nav a:hover {
-            text-decoration: underline;
-        }
+       
         .user-info {
             color: white;
-            margin-right: 15px;
+            margin-right: 20px;
+            font-weight: 500;
+            opacity: 0.9;
         }
         .container {
 /*          margin: 0 auto; */

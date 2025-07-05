@@ -4,43 +4,62 @@ block content %}
 <style>
     .blog-list {
         max-width: 800px;
-        margin: 30px auto;
+        margin: 40px auto;
         padding: 0 20px;
     }
 
     .blog-list h2 {
         color: #333;
-        margin-bottom: 25px;
+        margin-bottom: 35px;
         text-align: center;
+        font-size: 2.2rem;
+        border-bottom: 3px solid #007bff;
+        padding-bottom: 15px;
+        position: relative;
     }
+    
 
     .blog-item {
         background: white;
         border: 1px solid #e0e0e0;
-        border-radius: 6px;
-        padding: 15px;
-        margin-bottom: 15px;
+        border-radius: 10px;
+        padding: 25px;
+        margin-bottom: 25px;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
     }
+    
+    
+    
+    
 
     .blog-item h3 {
         margin: 0;
-        font-size: 1.2rem;
+        font-size: 1.4rem;
+        font-weight: 600;
+        line-height: 1.3;
     }
 
     .blog-item h3 a {
         color: #333;
         text-decoration: none;
+        transition: color 0.3s ease;
     }
 
-    .blog-item h3 a:hover {
-        color: #666;
-    }
+    
 
     .blog-date {
         color: #666;
         font-size: 0.9rem;
-        margin-top: 8px;
+        margin-top: 12px;
+        font-style: italic;
+        display: flex;
+        align-items: center;
     }
+    
+    
 </style>
 
 <div class="blog-list">
@@ -51,7 +70,7 @@ block content %}
         <div class="blog-item">
             <h3><a href="{{ url_for('detail', id=blog.id) }}">{{ blog.title }}</a></h3>
             <div class="blog-date">
-                Published on {{ blog.created_date.strftime('%B %d, %Y at %I:%M %p') }}
+                Published on {{ blog.created_date.strftime('%B %d, %Y') }}
             </div>
         </div>
         {% endfor %} 
