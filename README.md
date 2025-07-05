@@ -97,7 +97,14 @@ Visit [http://127.0.0.1:5000/](http://127.0.0.1:5000/) in your browser.
 
 ## 📸 Screenshot
 
-![Homepage Screenshot](static/screenshots/homepage.png)
+HomePage Screenshot
+![Homepage Screenshot](static/screenshots/home.png)
+
+List Blogs Screenshot
+![List Blogs Screenshot](static/screenshots/listblogs.png)
+
+Create Blogs Screenshot
+![Create Blogs Screenshot](static/screenshots/createblog.png)
 
 ---
 
