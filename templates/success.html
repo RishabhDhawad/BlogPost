@@ -1,102 +1,153 @@
 {% extends "base.html" %}
 {% block title %}Success - Flask Blog{% endblock %}
+
 {% block content %}
 
-<style>
-    .success-container {
-        max-width: 600px;
-        margin: 50px auto;
-        text-align: center;
-        padding: 40px 30px;
-        background: white;
-        border-radius: 12px;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-    }
-    
-    .success-title {
-        color: #28a745;
-        margin-bottom: 25px;
-        font-size: 2rem;
-        border-bottom: 2px solid #f0f0f0;
-        padding-bottom: 15px;
-    }
-    
-    .success-message {
-        font-size: 1.1rem;
-        color: #666;
-        margin-bottom: 35px;
-        line-height: 1.5;
-    }
-    
-    .btn {
-        display: inline-block;
-        padding: 14px 28px;
-        margin: 10px;
-        text-decoration: none;
-        font-weight: 600;
-        border-radius: 8px;
-        transition: all 0.3s ease;
-        font-size: 1rem;
-    }
-    
-    .btn-primary {
-        background-color: #007bff;
-        color: white;
-    }
-    
-    .btn-primary:hover {
-        background-color: #0056b3;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(0,123,255,0.3);
-    }
-    
-    .btn-secondary {
-        background-color: #6c757d;
-        color: white;
-    }
-    
-    .btn-secondary:hover {
-        background-color: #545b62;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(108,117,125,0.3);
-    }
-    
-    .blog-preview {
-        padding: 25px;
-        margin: 30px 0;
-        text-align: center;
-        background: #f8f9fa;
-        border-radius: 8px;
-        border: 1px solid #e9ecef;
-    }
-    
-    .blog-preview h3 {
-        color: #333;
-        margin-bottom: 15px;
-        font-size: 1.3rem;
-    }
-    
-    .blog-preview p {
-        margin: 8px 0;
-        color: #666;
-    }
-</style>
+<div style="
+    max-width:650px;
+    margin:70px auto;
+    background:#ffffff;
+    border:1px solid #e5e7eb;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 12px 35px rgba(15,23,42,.08);
+">
 
-<div class="success-container">
-    <h1 class="success-title">Blog Post Published Successfully!</h1>
-    <p class="success-message">Your blog post has been saved and is now live.</p>
+    <div style="
+        padding:40px;
+        text-align:center;
+        border-bottom:1px solid #eef2f7;
+    ">
 
-    <div class="blog-preview">
-        <h3>{{ blog.title }}</h3>
-        <p><strong>Published:</strong> {{ blog.created_date.strftime('%B %d, %Y') }}</p>
-        {% if blog.image_filename %}
-        <p><strong>Image:</strong> Uploaded Successfully</p>
-        {% endif %}
+        <div style="
+            width:80px;
+            height:80px;
+            margin:0 auto 24px;
+            border-radius:50%;
+            background:#dcfce7;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-size:38px;
+        ">
+            ✓
+        </div>
+
+        <h1 style="
+            margin:0;
+            font-size:30px;
+            color:#111827;
+            font-weight:700;
+        ">
+            Blog Published Successfully
+        </h1>
+
+        <p style="
+            margin:16px auto 0;
+            color:#6b7280;
+            font-size:16px;
+            line-height:1.7;
+            max-width:480px;
+        ">
+            Your blog has been published successfully and is now available for readers to view.
+        </p>
+
     </div>
 
-    <div class="action-buttons">
-        <a class="btn btn-primary" href="{{ url_for('detail', id=blog.id) }}">View Your Blog Post</a>
-        <a class="btn btn-secondary" href="{{ url_for('home') }}">Back to Home</a>
+    <div style="padding:34px;">
+
+        <div style="
+            background:#f8fafc;
+            border:1px solid #e5e7eb;
+            border-radius:14px;
+            padding:24px;
+            margin-bottom:32px;
+        ">
+
+            <h2 style="
+                margin:0 0 18px;
+                font-size:22px;
+                color:#111827;
+            ">
+                {{ blog.title }}
+            </h2>
+
+            <div style="
+                display:flex;
+                justify-content:space-between;
+                flex-wrap:wrap;
+                gap:12px;
+                color:#6b7280;
+                font-size:15px;
+            ">
+
+                <span>
+                    📅 {{ blog.created_date.strftime('%B %d, %Y') }}
+                </span>
+
+                {% if blog.image_filename %}
+                <span>
+                    🖼️ Cover image uploaded
+                </span>
+                {% endif %}
+
+            </div>
+
+        </div>
+
+        <div style="
+            display:flex;
+            justify-content:center;
+            gap:16px;
+            flex-wrap:wrap;
+        ">
+
+            <a
+                href="{{ url_for('detail', id=blog.id) }}"
+                style="
+                    text-decoration:none;
+                    background:#2563eb;
+                    color:white;
+                    padding:14px 28px;
+                    border-radius:10px;
+                    font-weight:600;
+                    box-shadow:0 8px 20px rgba(37,99,235,.22);
+                ">
+                View Blog
+            </a>
+
+            <a
+                href="{{ url_for('create') }}"
+                style="
+                    text-decoration:none;
+                    background:white;
+                    color:#374151;
+                    border:1px solid #d1d5db;
+                    padding:14px 28px;
+                    border-radius:10px;
+                    font-weight:600;
+                ">
+                Write Another
+            </a>
+
+            <a
+                href="{{ url_for('home') }}"
+                style="
+                    text-decoration:none;
+                    background:#f8fafc;
+                    color:#374151;
+                    border:1px solid #d1d5db;
+                    padding:14px 28px;
+                    border-radius:10px;
+                    font-weight:600;
+                ">
+                Home
+            </a>
+
+        </div>
+
     </div>
+
 </div>
+
 {% endblock %}

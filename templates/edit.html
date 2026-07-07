@@ -1,191 +1,246 @@
 {% extends "base.html" %}
 
 {% block title %}
-{{ blog.title }} - Flask Blog
-{% endblock %}
-
-{% block head %}
-<title>Edit Post</title>
+Edit Blog - {{ blog.title }}
 {% endblock %}
 
 {% block content %}
-
-<style>
-    .edit-container {
-        max-width: 800px;
-        margin: 40px auto;
-        padding: 30px;
-        background: white;
-        border-radius: 8px;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
-    
-    h2 {
-        color: #333;
-        margin-bottom: 30px;
-        text-align: center;
-        border-bottom: 2px solid #f0f0f0;
-        padding-bottom: 15px;
-    }
-    
-    .form-group {
-        margin-bottom: 25px;
-    }
-
-    label {
-        display: block;
-        margin-bottom: 8px;
-        font-weight: 600;
-        color: #333;
-    }
-
-    input[type="text"],
-    textarea,
-    input[type="file"] {
-        width: 100%;
-        padding: 12px;
-        border: 1px solid #ddd;
-        border-radius: 6px;
-        box-sizing: border-box;
-        transition: border-color 0.3s ease;
-    }
-    
-    input[type="text"]:focus,
-    textarea:focus {
-        outline: none;
-        border-color: #007bff;
-        box-shadow: 0 0 0 3px rgba(0,123,255,0.1);
-    }
-
-    textarea {
-        resize: vertical;
-        min-height: 150px;
-    }
-
-    .btn {
-        background-color: #007bff;
-        color: white;
-        padding: 12px 24px;
-        border: none;
-        border-radius: 6px;
-        font-weight: 600;
-        cursor: pointer;
-        margin-right: 15px;
-        transition: all 0.3s ease;
-    }
-    
-    .btn:hover {
-        background-color: #0056b3;
-        transform: translateY(-2px);
-    }
-    
-    .btn[type="button"] {
-        background-color: #6c757d;
-    }
-    
-    .btn[type="button"]:hover {
-        background-color: #545b62;
-    }
-    
-    .current-image {
-        margin: 20px 0;
-        padding: 20px;
-        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-        border-radius: 8px;
-        border: 1px solid #dee2e6;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    }
-    
-    .current-image label {
-        display: block;
-        margin-bottom: 10px;
-        font-weight: 600;
-        color: #495057;
-        font-size: 0.95rem;
-    }
-    
-    .current-image img {
-        max-width: 200px;
-        border-radius: 6px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        transition: transform 0.3s ease;
-    }
-    
-    .current-image img:hover {
-        transform: scale(1.02);
-    }
-    
-    .button-group {
-        display: flex;
-        gap: 15px;
-        margin-top: 30px;
-        flex-wrap: wrap;
-    }
-    
-    .btn {
-        flex: 1;
-        min-width: 120px;
-        background-color: #007bff;
-        color: white;
-        padding: 14px 28px;
-        border: none;
-        border-radius: 8px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        font-size: 1rem;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-    
-    .btn:hover {
-        background-color: #0056b3;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-    }
-    
-    .btn[type="button"] {
-        background-color: #6c757d;
-    }
-    
-    .btn[type="button"]:hover {
-        background-color: #545b62;
-    }
-</style>
 
 <script>
     var listBlogsUrl = "{{ url_for('listblogs') }}";
 </script>
 
-<div class="edit-container">
-    <h2>Edit Blog Post</h2>
+<div style="
+    max-width:760px;
+    margin:50px auto;
+    background:#ffffff;
+    border:1px solid #e5e7eb;
+    border-radius:18px;
+    box-shadow:0 12px 35px rgba(15,23,42,.08);
+    overflow:hidden;
+">
 
-    <form method="POST" enctype="multipart/form-data">
-        <div class="form-group">
-            <label for="title">Blog Title</label>
-            <input id="title" name="title" required type="text" value="{{ blog.title }}">
+    <div style="
+        padding:32px 36px;
+        border-bottom:1px solid #eef2f7;
+    ">
+
+        <h1 style="
+            margin:0;
+            font-size:30px;
+            color:#111827;
+            font-weight:700;
+        ">
+            Edit Blog
+        </h1>
+
+        <p style="
+            margin:10px 0 0;
+            color:#6b7280;
+            font-size:15px;
+            line-height:1.6;
+        ">
+            Update your blog title, content, or cover image before publishing the changes.
+        </p>
+
+    </div>
+
+    <form method="POST"
+          enctype="multipart/form-data"
+          style="padding:36px;">
+
+        <!-- Title -->
+
+        <div style="margin-bottom:24px;">
+
+            <label
+                for="title"
+                style="
+                    display:block;
+                    margin-bottom:8px;
+                    font-weight:600;
+                    color:#374151;
+                ">
+                Blog Title
+            </label>
+
+            <input
+                id="title"
+                name="title"
+                type="text"
+                required
+                value="{{ blog.title }}"
+
+                style="
+                    width:100%;
+                    padding:14px 16px;
+                    border:1px solid #d1d5db;
+                    border-radius:10px;
+                    font-size:15px;
+                    box-sizing:border-box;
+                    outline:none;
+                ">
+
         </div>
 
-        <div class="form-group">
-            <label for="body">Blog Content</label>
-            <textarea id="body" name="body" required>{{ blog.body }}</textarea>
+        <!-- Content -->
+
+        <div style="margin-bottom:24px;">
+
+            <label
+                for="body"
+                style="
+                    display:block;
+                    margin-bottom:8px;
+                    font-weight:600;
+                    color:#374151;
+                ">
+                Blog Content
+            </label>
+
+            <textarea
+                id="body"
+                name="body"
+                required
+
+                style="
+                    width:100%;
+                    min-height:260px;
+                    padding:16px;
+                    border:1px solid #d1d5db;
+                    border-radius:10px;
+                    resize:vertical;
+                    font-size:15px;
+                    line-height:1.8;
+                    font-family:inherit;
+                    box-sizing:border-box;
+                    outline:none;
+                ">{{ blog.body }}</textarea>
+
         </div>
+
+        <!-- Current Image -->
 
         {% if current_image %}
-            <div class="current-image">
-                <label>Current Image:</label>
-                <img src="{{ url_for('static', filename='uploads/' + current_image) }}" alt="Current Image">
-            </div>
+
+        <div style="
+            margin-bottom:26px;
+            padding:20px;
+            border:1px solid #e5e7eb;
+            border-radius:12px;
+            background:#f8fafc;
+        ">
+
+            <p style="
+                margin:0 0 16px;
+                font-weight:600;
+                color:#374151;
+            ">
+                Current Cover Image
+            </p>
+
+            <img
+                src="{{ url_for('static', filename='uploads/' + current_image) }}"
+                alt="Current Image"
+
+                style="
+                    width:100%;
+                    max-height:280px;
+                    object-fit:cover;
+                    border-radius:10px;
+                    display:block;
+                ">
+
+        </div>
+
         {% endif %}
 
-        <div class="form-group">
-            <label for="image">Upload New Image</label>
-            <input type="file" id="image" name="file" accept="image/*">
+        <!-- Upload -->
+
+        <div style="margin-bottom:32px;">
+
+            <label
+                for="image"
+                style="
+                    display:block;
+                    margin-bottom:8px;
+                    font-weight:600;
+                    color:#374151;
+                ">
+                Replace Cover Image
+            </label>
+
+            <input
+                type="file"
+                id="image"
+                name="file"
+                accept="image/*"
+
+                style="
+                    width:100%;
+                    padding:12px;
+                    border:1px dashed #cbd5e1;
+                    border-radius:10px;
+                    background:#f8fafc;
+                    box-sizing:border-box;
+                    cursor:pointer;
+                ">
+
+            <p style="
+                margin:8px 0 0;
+                color:#9ca3af;
+                font-size:13px;
+            ">
+                Leave this empty if you don't want to change the current image.
+            </p>
+
         </div>
 
-        <div class="button-group">
-            <button class="btn" type="submit">Update Post</button>
-            <button class="btn" type="button" onclick="location.href=listBlogsUrl">Cancel</button>
+        <!-- Buttons -->
+
+        <div style="
+            display:flex;
+            justify-content:flex-end;
+            gap:14px;
+            flex-wrap:wrap;
+        ">
+
+            <button
+                type="button"
+                onclick="location.href=listBlogsUrl"
+
+                style="
+                    background:#ffffff;
+                    color:#374151;
+                    border:1px solid #d1d5db;
+                    padding:13px 22px;
+                    border-radius:10px;
+                    cursor:pointer;
+                    font-weight:600;
+                ">
+                Cancel
+            </button>
+
+            <button
+                type="submit"
+
+                style="
+                    background:#2563eb;
+                    color:white;
+                    border:none;
+                    padding:13px 24px;
+                    border-radius:10px;
+                    font-weight:600;
+                    cursor:pointer;
+                    box-shadow:0 8px 20px rgba(37,99,235,.22);
+                ">
+                Save Changes
+            </button>
+
         </div>
+
     </form>
+
 </div>
+
 {% endblock %}

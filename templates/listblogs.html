@@ -1,81 +1,202 @@
-{% extends "base.html" %} {% block title %}Home - Flask Blog{% endblock %} {%
-block content %}
+{% extends "base.html" %}
+{% block title %}Blogs - Flask Blog{% endblock %}
 
-<style>
-    .blog-list {
-        max-width: 800px;
-        margin: 40px auto;
-        padding: 0 20px;
-    }
+{% block content %}
 
-    .blog-list h2 {
-        color: #333;
-        margin-bottom: 35px;
-        text-align: center;
-        font-size: 2.2rem;
-        border-bottom: 3px solid #007bff;
-        padding-bottom: 15px;
-        position: relative;
-    }
-    
+<div style="
+    max-width:1000px;
+    margin:45px auto;
+    padding:0 20px;
+">
 
-    .blog-item {
-        background: white;
-        border: 1px solid #e0e0e0;
-        border-radius: 10px;
-        padding: 25px;
-        margin-bottom: 25px;
-        box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-        transition: all 0.3s ease;
-        position: relative;
-        overflow: hidden;
-    }
-    
-    
-    
-    
+    <div style="
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        margin-bottom:35px;
+        flex-wrap:wrap;
+        gap:20px;
+    ">
 
-    .blog-item h3 {
-        margin: 0;
-        font-size: 1.4rem;
-        font-weight: 600;
-        line-height: 1.3;
-    }
+        <div>
 
-    .blog-item h3 a {
-        color: #333;
-        text-decoration: none;
-        transition: color 0.3s ease;
-    }
+            <h1 style="
+                margin:0;
+                font-size:34px;
+                color:#111827;
+                font-weight:700;
+            ">
+                Explore Blogs
+            </h1>
 
-    
+            <p style="
+                margin:10px 0 0;
+                color:#6b7280;
+                font-size:16px;
+            ">
+                Read articles shared by our community.
+            </p>
 
-    .blog-date {
-        color: #666;
-        font-size: 0.9rem;
-        margin-top: 12px;
-        font-style: italic;
-        display: flex;
-        align-items: center;
-    }
-    
-    
-</style>
-
-<div class="blog-list">
-    <h2>All Blog Posts</h2>
-
-    {% if blogs %} 
-        {% for blog in blogs %}
-        <div class="blog-item">
-            <h3><a href="{{ url_for('detail', id=blog.id) }}">{{ blog.title }}</a></h3>
-            <div class="blog-date">
-                Published on {{ blog.created_date.strftime('%B %d, %Y') }}
-            </div>
         </div>
-        {% endfor %} 
+
+        {% if current_user.is_authenticated %}
+
+        <a
+            href="{{ url_for('create') }}"
+            style="
+                text-decoration:none;
+                background:#2563eb;
+                color:white;
+                padding:13px 24px;
+                border-radius:10px;
+                font-weight:600;
+                box-shadow:0 8px 18px rgba(37,99,235,.22);
+            ">
+            + New Blog
+        </a>
+
+        {% endif %}
+
+    </div>
+
+    {% if blogs %}
+
+        {% for blog in blogs %}
+
+        <div style="
+            background:white;
+            border:1px solid #e5e7eb;
+            border-radius:16px;
+            padding:26px 28px;
+            margin-bottom:22px;
+            box-shadow:0 8px 24px rgba(15,23,42,.05);
+        ">
+
+            <div style="
+                display:flex;
+                justify-content:space-between;
+                align-items:flex-start;
+                gap:20px;
+                flex-wrap:wrap;
+            ">
+
+                <div style="flex:1;">
+
+                    <a
+                        href="{{ url_for('detail', id=blog.id) }}"
+                        style="
+                            text-decoration:none;
+                            color:#111827;
+                        ">
+
+                        <h2 style="
+                            margin:0;
+                            font-size:24px;
+                            font-weight:700;
+                            line-height:1.4;
+                        ">
+                            {{ blog.title }}
+                        </h2>
+
+                    </a>
+
+                    <p style="
+                        margin:12px 0;
+                        color:#6b7280;
+                        font-size:14px;
+                    ">
+                        📅 {{ blog.created_date.strftime('%B %d, %Y') }}
+                    </p>
+
+                    <p style="
+                        margin:0;
+                        color:#4b5563;
+                        line-height:1.8;
+                    ">
+
+                        {{ blog.body[:180] }}
+                        {% if blog.body|length > 180 %}...{% endif %}
+
+                    </p>
+
+                </div>
+
+                <div>
+
+                    <a
+                        href="{{ url_for('detail', id=blog.id) }}"
+                        style="
+                            display:inline-block;
+                            text-decoration:none;
+                            background:#eff6ff;
+                            color:#2563eb;
+                            padding:12px 18px;
+                            border-radius:10px;
+                            font-weight:600;
+                            white-space:nowrap;
+                        ">
+                        Read More →
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
     {% else %}
-        <p>No blog posts yet. Create your first blog post above!</p>
+
+    <div style="
+        background:white;
+        border:1px dashed #cbd5e1;
+        border-radius:16px;
+        padding:70px 30px;
+        text-align:center;
+    ">
+
+        <div style="font-size:60px;">
+            📝
+        </div>
+
+        <h2 style="
+            margin:20px 0 12px;
+            color:#111827;
+        ">
+            No Blogs Yet
+        </h2>
+
+        <p style="
+            color:#6b7280;
+            max-width:500px;
+            margin:0 auto 28px;
+            line-height:1.8;
+        ">
+            There aren't any blog posts yet. Be the first one to publish something amazing.
+        </p>
+
+        {% if current_user.is_authenticated %}
+
+        <a
+            href="{{ url_for('create') }}"
+            style="
+                text-decoration:none;
+                background:#2563eb;
+                color:white;
+                padding:14px 28px;
+                border-radius:10px;
+                font-weight:600;
+            ">
+            Create First Blog
+        </a>
+
+        {% endif %}
+
+    </div>
+
     {% endif %}
+
 </div>
+
 {% endblock %}

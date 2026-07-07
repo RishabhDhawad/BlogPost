@@ -1,93 +1,190 @@
 {% extends "base.html" %}
 {% block title %}Register - Flask Blog{% endblock %}
+
 {% block content %}
 
-<style>
-    .register-container {
-        max-width: 400px;
-        margin: 50px auto;
-        padding: 30px;
-        background: white;
-        border-radius: 12px;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-    }
+<div style="
+    max-width:500px;
+    margin:70px auto;
+    background:#ffffff;
+    border:1px solid #e5e7eb;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 12px 35px rgba(15,23,42,.08);
+">
 
-    h2 {
-        text-align: center;
-        color: #333;
-        margin-bottom: 30px;
-        font-size: 1.8rem;
-        border-bottom: 2px solid #f0f0f0;
-        padding-bottom: 15px;
-    }
+    <div style="
+        padding:36px;
+        border-bottom:1px solid #eef2f7;
+        text-align:center;
+    ">
 
-    .form-group {
-        margin-bottom: 25px;
-    }
-
-    .form-group input {
-        width: 100%;
-        padding: 14px;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        box-sizing: border-box;
-        font-size: 1rem;
-        transition: all 0.3s ease;
-    }
-
-    .btn {
-        width: 100%;
-        padding: 14px;
-        background: #007bff;
-        color: white;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-        font-size: 1rem;
-        font-weight: 600;
-        transition: all 0.3s ease;
-    }
-
-    .login-link {
-        text-align: center;
-        margin-top: 25px;
-        color: #666;
-        padding-top: 20px;
-        border-top: 1px solid #f0f0f0;
-    }
-
-    .login-link a {
-        color: #007bff;
-        text-decoration: none;
-        font-weight: 500;
-        transition: color 0.3s ease;
-    }
-
-    .login-link a:hover {
-        color: #0056b3;
-        text-decoration: underline;
-    }
-</style>
-
-<div class="register-container">
-    <h2>Register</h2>
-    
-    <form method="POST">
-        <div class="form-group">
-            <input type="text" name="username" placeholder="Username" required>
+        <div style="
+            width:72px;
+            height:72px;
+            margin:0 auto 20px;
+            background:#eff6ff;
+            border-radius:50%;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-size:30px;
+        ">
+            👤
         </div>
-        <div class="form-group">
-            <input type="email" name="email" placeholder="Email" required>
-        </div>
-        <div class="form-group">
-            <input type="password" name="password" placeholder="Password" required>
-        </div>
-        <button type="submit" class="btn">Register</button>
-    </form>
-    
-    <div class="login-link">
-        <a href="{{ url_for('login') }}">Already have an account? Login here.</a>
+
+        <h1 style="
+            margin:0;
+            color:#111827;
+            font-size:30px;
+            font-weight:700;
+        ">
+            Create Account
+        </h1>
+
+        <p style="
+            margin:12px 0 0;
+            color:#6b7280;
+            line-height:1.7;
+        ">
+            Join FlaskBlog and start sharing your stories with the community.
+        </p>
+
     </div>
+
+    <form method="POST" style="padding:36px;">
+
+        <div style="margin-bottom:20px;">
+
+            <label style="
+                display:block;
+                margin-bottom:8px;
+                font-weight:600;
+                color:#374151;
+            ">
+                Username
+            </label>
+
+            <input
+                type="text"
+                name="username"
+                required
+                placeholder="Choose a username"
+
+                style="
+                    width:100%;
+                    padding:14px 16px;
+                    border:1px solid #d1d5db;
+                    border-radius:10px;
+                    font-size:15px;
+                    box-sizing:border-box;
+                    outline:none;
+                ">
+
+        </div>
+
+        <div style="margin-bottom:20px;">
+
+            <label style="
+                display:block;
+                margin-bottom:8px;
+                font-weight:600;
+                color:#374151;
+            ">
+                Email Address
+            </label>
+
+            <input
+                type="email"
+                name="email"
+                required
+                placeholder="Enter your email"
+
+                style="
+                    width:100%;
+                    padding:14px 16px;
+                    border:1px solid #d1d5db;
+                    border-radius:10px;
+                    font-size:15px;
+                    box-sizing:border-box;
+                    outline:none;
+                ">
+
+        </div>
+
+        <div style="margin-bottom:28px;">
+
+            <label style="
+                display:block;
+                margin-bottom:8px;
+                font-weight:600;
+                color:#374151;
+            ">
+                Password
+            </label>
+
+            <input
+                type="password"
+                name="password"
+                required
+                placeholder="Create a secure password"
+
+                style="
+                    width:100%;
+                    padding:14px 16px;
+                    border:1px solid #d1d5db;
+                    border-radius:10px;
+                    font-size:15px;
+                    box-sizing:border-box;
+                    outline:none;
+                ">
+
+        </div>
+
+        <button
+            type="submit"
+
+            style="
+                width:100%;
+                background:#2563eb;
+                color:white;
+                border:none;
+                padding:15px;
+                border-radius:10px;
+                font-size:15px;
+                font-weight:600;
+                cursor:pointer;
+                box-shadow:0 8px 20px rgba(37,99,235,.22);
+            ">
+
+            Create Account
+
+        </button>
+
+    </form>
+
+    <div style="
+        padding:24px 36px;
+        border-top:1px solid #eef2f7;
+        text-align:center;
+        color:#6b7280;
+        font-size:15px;
+    ">
+
+        Already have an account?
+
+        <a
+            href="{{ url_for('login') }}"
+            style="
+                color:#2563eb;
+                text-decoration:none;
+                font-weight:600;
+            ">
+            Sign In
+        </a>
+
+    </div>
+
 </div>
 
 {% endblock %}

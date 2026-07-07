@@ -42,7 +42,8 @@ Welcome to the **Flask Blog Application**! This is a simple, clean, and function
 Flask_Blog/
 │
 ├── static/
-│   └── uploads/         # Uploaded images
+│   ├── uploads/         # Uploaded images
+│   └── screenshots/     # Application screenshots
 │
 ├── templates/
 │   ├── base.html        # Base template
@@ -95,16 +96,22 @@ Visit [http://127.0.0.1:5000/](http://127.0.0.1:5000/) in your browser.
 
 ---
 
-## 📸 Screenshot
+## 📸 Screenshots
 
-HomePage Screenshot
-![Homepage Screenshot](static/screenshots/home.png)
+### Home Page
+![Home Page](static/screenshots/home.png)
 
-List Blogs Screenshot
-![List Blogs Screenshot](static/screenshots/listblogs.png)
+### List Blogs
+![List Blogs](static/screenshots/listblogs.png)
 
-Create Blogs Screenshot
-![Create Blogs Screenshot](static/screenshots/createblog.png)
+### Blog Detail View
+![Blog Detail](static/screenshots/blog_view.png)
+
+### Create Blog Post
+![Create Blog](static/screenshots/createblog.png)
+
+### Edit Blog Post
+![Edit Blog](static/screenshots/edit_blog.png)
 
 ---
 
